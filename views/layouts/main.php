@@ -28,7 +28,7 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
-    NavBar::begin([
+    /*NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
@@ -55,9 +55,34 @@ AppAsset::register($this);
             )
         ],
     ]);
-    NavBar::end();
+    NavBar::end();*/
     ?>
 
+    <div id="header">
+        <h1 id="logo"><a href="#">shoparound</a></h1>
+
+        <!-- Cart -->
+        <div id="cart">
+            <a href="#" class="cart-link">Your Shopping Cart</a>
+            <div class="cl">&nbsp;</div>
+            <span>Articles: <strong>4</strong></span>
+            &nbsp;&nbsp;
+            <span>Cost: <strong>$250.99</strong></span>
+        </div>
+        <!-- End Cart -->
+
+        <!-- Navigation -->
+        <div id="navigation">
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">My Account</a></li>
+                <li><a href="#">The Store</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <!-- End Navigation -->
+    </div>
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -67,13 +92,22 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+    <div id="footer">
+        <p class="left">
+            <a href="#">Home</a>
+            <span>|</span>
+            <a href="#">Support</a>
+            <span>|</span>
+            <a href="#">My Account</a>
+            <span>|</span>
+            <a href="#">The Store</a>
+            <span>|</span>
+            <a href="#">Contact</a>
+        </p>
+        <p class="right">
+            &copy; 2017 
+        </p>
     </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>
