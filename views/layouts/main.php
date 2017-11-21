@@ -105,7 +105,7 @@ AppAsset::register($this);
             <a href="#">Contact</a>
         </p>
         <p class="right">
-            &copy; 2017 
+            &copy; 2017
         </p>
     </div>
 
