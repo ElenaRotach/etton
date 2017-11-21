@@ -60,16 +60,25 @@ AppAsset::register($this);
 
     <div id="header">
         <h1 id="logo"><a href="#">shoparound</a></h1>
-
-        <!-- Cart -->
-        <div id="cart">
-            <a href="#" class="cart-link">Your Shopping Cart</a>
+        <?php if (Yii::$app->user->isGuest) {
+            echo '<div id="cart"><a href="/site/signup"  class="cart-link-user">reg</a><br><a href="/site/login" class="cart-link-user">login</a> </div>';
+        } else {
+            echo '<div id="cart">' . '<a href="#" class="cart-link-user">Your Shopping Cart</a>
             <div class="cl">&nbsp;</div>
             <span>Articles: <strong>4</strong></span>
             &nbsp;&nbsp;
             <span>Cost: <strong>$250.99</strong></span>
-        </div>
-        <!-- End Cart -->
+            <br>' .
+            Html::beginForm(['/site/logout'], 'post')
+        . Html::submitButton(
+            'Logout (' . Yii::$app->user->identity->username . ')',
+            ['class' => 'btn btn-link logout cart-link-user']
+        )
+        . Html::endForm() .
+        '</div>';
+        }
+
+        ?>
 
         <!-- Navigation -->
         <div id="navigation">

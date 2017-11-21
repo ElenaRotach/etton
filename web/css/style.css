@@ -44,7 +44,8 @@ h1#logo a{text-decoration: none; color: #fff;}
 #navigation ul li a.active,
 #navigation ul li a:hover{ background:#fff; color:#8b0000; }
 
-#cart { float:right; width:160px; top:0; right:0; height:51px; background:#8b0000; color:#fff; padding:13px 10px 0 10px; white-space:nowrap; line-height:20px;}
+#cart { float:right; width:160px; top:0; right:0; height:51px; background:#8b0000; color:#fff; padding:3px 10px 0 10px; white-space:nowrap; line-height:20px;}
+a.cart-link-user, button.cart-link-user, button.cart-link-user:hover{color:#fff; float: right; text-decoration: none; padding-top: 0px}
 a.cart-link { color:#fff; background:url(images/cart-link.gif) no-repeat 0 0; padding:0 0 0 32px; text-decoration: none;}
 a.cart-link:hover { text-decoration: underline;}
 
