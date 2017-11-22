@@ -73,7 +73,7 @@ a.bul { background:url(images/bul.gif) no-repeat 0 center; padding-left:10px;}
 
 .search-submit { width:70px; background:#8b0000; border:0; color:#fff; height:27px; display:block; line-height:26px; cursor:pointer; margin:12px 0 10px 0;}
 
-.categories { min-height:383px; }
+/*.categories { min-height:383px; }*/
 .categories ul { list-style-type: none; font-size:13px;}
 .categories ul li{ border-bottom:dashed 1px #ccc; padding:5px 0;}
 .categories ul li.last{ border-bottom:0; padding-bottom:0;}
@@ -91,12 +91,13 @@ a.bul { background:url(images/bul.gif) no-repeat 0 center; padding-left:10px;}
 #slider-nav a:hover,
 #slider-nav a.active { background:#fff;}
 
-.products {}
+.products {padding-top: 30px;}
 .products ul{ list-style-type: none;}
-.products ul li{ position:relative; padding:1px; border:solid 1px #dedede; float:left; width:231px; margin-right:9px; height:383px; overflow:hidden; }
+.products ul li{ position:relative; padding:1px; border:solid 1px #dedede; float:left; width:231px; margin-right:9px; height:330px; overflow:hidden; }
 .products ul li.last{ margin-right:0; }
+.products img{width: 100%;     padding: 5px;}
 
-.product-info{ position:absolute; width:153px; top:194px; left:0;}
+.product-info{ position:absolute; width:153px; top:150px; left:0;}
 .product-info h3{ background:#8b0000; color:#fff; padding:6px 10px; }
 .product-info h4{ font-weight: normal;}
 .product-info p{ font-size:16px; line-height:18px; text-transform: uppercase; font-weight: bold; color:#000; padding:5px 0 7px 0;}
@@ -127,7 +128,7 @@ h3.ico2 { background-image:url(images/ico2.gif);}
 h3.ico3 { background-image:url(images/ico3.gif);}
 h3.ico4 { background-image:url(images/ico4.gif);}
 
-#footer { height:51px; background:#ebebeb; white-space:nowrap; line-height:50px; padding:0 15px; color:#7b7b7b; margin-top:10px;}
+#footer { height:51px; background:#ebebeb; white-space:nowrap; line-height:50px; padding:0 15px; color:#7b7b7b; margin-top:10px;position: absolute;	bottom: 0px;}
 #footer a{ color:#7b7b7b; text-decoration: none;}
 #footer a:hover{ color:#000;}
 #footer span{ padding:0 2px;}

@@ -26,52 +26,20 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    /*NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();*/
-    ?>
-
     <div id="header">
-        <h1 id="logo"><a href="#">shoparound</a></h1>
+        <h1 id="logo"><a href="#">канцтовары</a></h1>
         <?php if (Yii::$app->user->isGuest) {
-            echo '<div id="cart"><a href="/site/signup"  class="cart-link-user">reg</a><br><a href="/site/login" class="cart-link-user">login</a> </div>';
+            echo '<div id="cart"><a href="/site/signup"  class="cart-link-user">Регистрация</a><br><a href="/site/login" class="cart-link-user">Вход</a> </div>';
         } else {
-            echo '<div id="cart">' . '<a href="#" class="cart-link-user">Your Shopping Cart</a>
+            echo '<div id="cart">' . '<a href="#" class="cart-link-user">Корзина</a>
             <div class="cl">&nbsp;</div>
-            <span>Articles: <strong>4</strong></span>
+            <span>Заказов: <strong>4</strong></span>
             &nbsp;&nbsp;
-            <span>Cost: <strong>$250.99</strong></span>
+            <span>Сумма: <strong>$250.99</strong></span>
             <br>' .
             Html::beginForm(['/site/logout'], 'post')
         . Html::submitButton(
-            'Logout (' . Yii::$app->user->identity->username . ')',
+            'Выход (' . Yii::$app->user->identity->username . ')',
             ['class' => 'btn btn-link logout cart-link-user']
         )
         . Html::endForm() .
@@ -83,35 +51,88 @@ AppAsset::register($this);
         <!-- Navigation -->
         <div id="navigation">
             <ul>
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Support</a></li>
-                <li><a href="#">My Account</a></li>
-                <li><a href="#">The Store</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#" class="active">Главная</a></li>
+                <li><a href="#">Помощь</a></li>
+                <li><a href="#">Профиль</a></li>
+                <li><a href="#">Заказы</a></li>
+                <li><a href="#">Контакты</a></li>
             </ul>
         </div>
         <!-- End Navigation -->
     </div>
-    <div class="container">
+<div class="right-menu col-lg-2">
+    <div id="sidebar">
+
+        <!-- Search -->
+        <div class="box search">
+            <h2>Поиск <span></span></h2>
+            <div class="box-content">
+                <form action="" method="post">
+
+                    <label>Ключевое слово</label>
+                    <input type="text" class="field" />
+
+                    <label>Категория</label>
+                    <select class="field">
+                        <option value="">-- Выбрать категорию --</option>
+                    </select>
+
+                    <div class="inline-field">
+                        <label>Цена от</label>
+                        <select class="field small-field">
+                            <option value="">10</option>
+                        </select>
+                        <label>до:</label>
+                        <select class="field small-field">
+                            <option value="">50</option>
+                        </select>
+                    </div>
+
+                    <input type="submit" class="search-submit" value="Искать" />
+
+
+
+                </form>
+            </div>
+        </div>
+        <!-- End Search -->
+
+        <!-- Categories -->
+        <div class="box categories">
+            <h2>Категории <span></span></h2>
+            <div class="box-content">
+                <ul>
+                    <li><a href="#">Ручки</a></li>
+                    <li><a href="#">Карандаши</a></li>
+                    <li class="last"><a href="#">Тетради</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- End Categories -->
+
+    </div>
+    <!-- End Sidebar -->
+
+</div>
+    <div class="col-lg-10">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
-</div>
 
-    <div id="footer">
+    <div id="footer" class="col-lg-12">
         <p class="left">
-            <a href="#">Home</a>
+            <a href="#">Главная</a>
             <span>|</span>
-            <a href="#">Support</a>
+            <a href="#">Помощь</a>
             <span>|</span>
-            <a href="#">My Account</a>
+            <a href="#">Профиль</a>
             <span>|</span>
-            <a href="#">The Store</a>
+            <a href="#">Заказы</a>
             <span>|</span>
-            <a href="#">Contact</a>
+            <a href="#">Контакты</a>
         </p>
         <p class="right">
             &copy; 2017
