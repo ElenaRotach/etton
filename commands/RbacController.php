@@ -50,5 +50,6 @@ class RbacController extends Controller {
 
         // Назначаем роль editor пользователю с ID 2
         $auth->assign($editor, 2);
+
     }
 }

@@ -45,7 +45,7 @@ AppAsset::register($this);
         . Html::endForm() .
         '</div>';
         }
-
+            //var_dump(Yii::$app->user->can('viewAdminPage'));exit();
         ?>
 
         <!-- Navigation -->
@@ -98,16 +98,7 @@ AppAsset::register($this);
         <!-- End Search -->
 
         <!-- Categories -->
-        <div class="box categories">
-            <h2>Категории <span></span></h2>
-            <div class="box-content">
-                <ul>
-                    <li><a href="#">Ручки</a></li>
-                    <li><a href="#">Карандаши</a></li>
-                    <li class="last"><a href="#">Тетради</a></li>
-                </ul>
-            </div>
-        </div>
+        <?= app\widgets\categoriesList\CategoriesListWidget::widget();?>
         <!-- End Categories -->
 
     </div>

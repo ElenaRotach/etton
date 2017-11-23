@@ -12,6 +12,7 @@ use app\models\ContactForm;
 use app\models\SignupForm;
 use app\models\User;
 
+
 class SiteController extends Controller
 {
     /**
@@ -39,6 +40,7 @@ class SiteController extends Controller
             ],
         ];
     }
+
 
     /**
      * @inheritdoc
