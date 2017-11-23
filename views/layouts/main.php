@@ -32,19 +32,7 @@ AppAsset::register($this);
         <?php if (Yii::$app->user->isGuest) {
             echo '<div id="cart"><a href="/site/signup"  class="cart-link-user">Регистрация</a><br><a href="/site/login" class="cart-link-user">Вход</a> </div>';
         } else {
-            echo '<div id="cart">' . '<a href="#" class="cart-link-user">Корзина</a>
-            <div class="cl">&nbsp;</div>
-            <span>Заказов: <strong>4</strong></span>
-            &nbsp;&nbsp;
-            <span>Сумма: <strong>$250.99</strong></span>
-            <br>' .
-            Html::beginForm(['/site/logout'], 'post')
-        . Html::submitButton(
-            'Выход (' . Yii::$app->user->identity->username . ')',
-            ['class' => 'btn btn-link logout cart-link-user']
-        )
-        . Html::endForm() .
-        '</div>';
+            echo \app\widgets\basketHeader\BasketHeaderWidget::widget();
         }
             //var_dump(Yii::$app->user->can('viewAdminPage'));exit();
         ?>
