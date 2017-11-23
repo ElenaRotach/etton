@@ -56,7 +56,11 @@ $config = [
         'category' => [
             'class' => 'app\modules\category\Category',
         ],
+        'product' => [
+            'class' => 'app\modules\product\Product',
+        ],
     ],
+
     'params' => $params,
 ];
 
