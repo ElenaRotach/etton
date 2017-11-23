@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\modules\category\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\category\models\CategorySearsh */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = 'Категории';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('добавить категорию', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,7 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'id_parent',
+            [
+                'attribute' => 'id_parent',
+                'label' => 'родительская категория',
+                'encodeLabel' => false,
+                'content' => function (Category $model) {
+                    return Category::find()->where(['id' => $model->id_parent])->asArray()->one()['name'];
+                },
+                'filterInputOptions' => [
+                    'class' => 'form-control'
+                ]
+            ],
             'name',
             'description:ntext',
 

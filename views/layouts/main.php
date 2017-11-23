@@ -66,7 +66,7 @@ if($user['item_name'] == 'admin')
 {
     echo $this->render('admin');
 }else{
-
+    echo $this->render('user');
 }
 ?>
     <div class="col-lg-10">

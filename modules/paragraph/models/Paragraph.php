@@ -45,10 +45,10 @@ class Paragraph extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'id_order' => 'Id Order',
-            'id_product' => 'Id Product',
-            'count' => 'Count',
+            'id' => 'Идентификатор',
+            'id_order' => 'Заказ',
+            'id_product' => 'Товар',
+            'count' => 'Количество',
         ];
     }
 

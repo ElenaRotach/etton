@@ -3,6 +3,7 @@
 namespace app\modules\category\models;
 
 use Yii;
+use app\modules\product\Product;
 
 /**
  * This is the model class for table "category".
@@ -35,8 +36,9 @@ class Category extends \yii\db\ActiveRecord
             [['id_parent'], 'integer'],
             [['name'], 'required'],
             [['description'], 'string'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'img'], 'string', 'max' => 255],
             [['id_parent'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['id_parent' => 'id']],
+           // [['img'], 'image',  'mimeTypes' => 'png,jpg', 'skipOnEmpty' => false],
         ];
     }
 
@@ -46,10 +48,11 @@ class Category extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'id_parent' => 'Id Parent',
-            'name' => 'Name',
-            'description' => 'Description',
+            'id' => 'идентификатор',
+            'id_parent' => 'родительская категория',
+            'name' => 'наименование',
+            'description' => 'описание',
+            'img' => 'Изображение'
         ];
     }
 

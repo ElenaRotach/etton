@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+use app\modules\category\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\product\models\ProductSearch */
@@ -17,7 +20,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'id_category') ?>
+    <?= $form->field($model, 'id_category')->widget(Select2::class,[
+        'name' => 'id_category',
+        'data' => ArrayHelper::map(Category::find()->asArray()->all(), 'id','name'),
+        'size' => Select2::MEDIUM,
+        'options' => [
+            'placeholder' => 'Укажите категорию',
+        ],
+    ]);?>
 
     <?= $form->field($model, 'name') ?>
 
@@ -28,8 +38,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'price') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('Перезагрузить', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

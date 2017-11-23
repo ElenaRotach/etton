@@ -2,12 +2,16 @@
 
 namespace app\modules\category\controllers;
 
+use app\modules\category\models\UploadImg;
 use Yii;
 use app\modules\category\models\Category;
 use app\modules\category\models\CategorySearsh;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -65,8 +69,32 @@ class CategoryController extends Controller
     {
         $model = new Category();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->isPost ) {
+            $request = Yii::$app->request->post();
+
+            if($model->load($request)) {
+
+                $file = UploadedFile::getInstance($model, 'img');
+                if(isset($file)) {
+                    $uploaded = $file->saveAs('img/' . $file->name);
+
+                    $model->img = $file->name;
+                }else{
+                    $model->img = null;
+                }
+                if ($model->save()) {
+
+                    return $this->redirect(['view', 'id' => $model->id]);
+                } else {
+                    return $this->render('create', [
+                        'model' => $model,
+                    ]);
+                }
+            } else{
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,

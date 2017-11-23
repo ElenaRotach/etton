@@ -24,7 +24,7 @@ class m171123_081415_create_product_table extends Migration
             'name' => $this->string()->notNull()->comment('Наименование'),
             'description' => $this->text()->comment('Описание'),
             'count' => $this->integer()->defaultValue(0)->comment('Количество в наличии'),
-            'price' => $this->decimal()->defaultValue(0)->comment('Цена')
+            'price' => $this->decimal(10,2)->defaultValue(0)->comment('Цена')
         ], $tableOptions);
     }
 

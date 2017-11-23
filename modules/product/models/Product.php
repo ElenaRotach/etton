@@ -39,7 +39,7 @@ class Product extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['description'], 'string'],
             [['price'], 'number'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'img'], 'string', 'max' => 255],
             [['id_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['id_category' => 'id']],
         ];
     }
@@ -50,12 +50,13 @@ class Product extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'id_category' => 'Id Category',
-            'name' => 'Name',
-            'description' => 'Description',
-            'count' => 'Count',
-            'price' => 'Price',
+            'id' => 'Идентификатор',
+            'id_category' => 'Категория',
+            'name' => 'Наименование',
+            'description' => 'Описание',
+            'count' => 'Количество',
+            'price' => 'Цена',
+            'img' => 'Изображение'
         ];
     }
 

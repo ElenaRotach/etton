@@ -42,10 +42,10 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'id_user' => 'Id User',
-            'paragraph' => 'Paragraph',
-            'status' => 'Status',
+            'id' => 'Идентификатор',
+            'id_user' => 'Пользователь',
+            'paragraph' => 'Пункты',
+            'status' => 'Статус',
         ];
     }
 
