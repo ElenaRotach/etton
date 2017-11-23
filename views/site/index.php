@@ -5,72 +5,9 @@
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
-    <div class="products">
-        <div class="cl">&nbsp;</div>
-        <ul>
-            <li>
-                <a href="#"><img src="img/school-93200_960_720.jpg" alt="" /></a>
-                <div class="product-info">
-                    <h3>LOREM IPSUM</h3>
-                    <div class="product-desc">
-                        <p>Lorem ipsum dolor sit<br />amet</p>
-                        <strong class="price">$58.99</strong>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="#"><img src="img/pen-1974727_960_720.jpg" alt="" /></a>
-                <div class="product-info">
-                    <h3>LOREM IPSUM</h3>
-                    <div class="product-desc">
-                        <p>Lorem ipsum dolor sit<br />amet</p>
-                        <strong class="price">$58.99</strong>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="#"><img src="img/document-428331_960_720.jpg" alt="" /></a>
-                <div class="product-info">
-                    <h3>LOREM IPSUM</h3>
-                    <div class="product-desc">
-                        <p>Lorem ipsum dolor sit<br />amet</p>
-                        <strong class="price">$58.99</strong>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="#"><img src="img/pen-1974727_960_720.jpg" alt="" /></a>
-                <div class="product-info">
-                    <h3>LOREM IPSUM</h3>
-                    <div class="product-desc">
-                        <p>Lorem ipsum dolor sit<br />amet</p>
-                        <strong class="price">$58.99</strong>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="#"><img src="img/leave-2163261_960_720.jpg" alt="" /></a>
-                <div class="product-info">
-                    <h3>LOREM IPSUM</h3>
-                    <div class="product-desc">
-                        <p>Lorem ipsum dolor sit<br />amet</p>
-                        <strong class="price">$58.99</strong>
-                    </div>
-                </div>
-            </li>
-            <li class="last">
-                <a href="#"><img src="img/paper-1141308_960_720.jpg" alt="" /></a>
-                <div class="product-info">
-                    <h3>LOREM IPSUM</h3>
-                    <div class="product-desc">
-                        <p>Lorem ipsum dolor sit<br />amet</p>
-                        <strong class="price">$58.99</strong>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <div class="cl">&nbsp;</div>
-    </div>
+
+
+<?php echo \app\widgets\randomProduct\RandomProductWidget::widget(); ?>
 
     <div class="cols">
         <div class="cl">&nbsp;</div>
