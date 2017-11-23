@@ -4,6 +4,7 @@ namespace app\modules\product\models;
 
 use Yii;
 use app\modules\category\models\Category;
+use app\modules\paragraph\models\Paragraph;
 
 /**
  * This is the model class for table "product".
@@ -63,7 +64,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getOrderParagraphs()
     {
-        return $this->hasMany(OrderParagraph::className(), ['id_product' => 'id']);
+        return $this->hasMany(Paragraph::className(), ['id_product' => 'id']);
     }
 
     /**

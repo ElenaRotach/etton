@@ -3,6 +3,7 @@
 namespace app\modules\order\models;
 
 use Yii;
+use app\modules\paragraph\Paragraph;
 
 /**
  * This is the model class for table "order".
@@ -53,6 +54,6 @@ class Order extends \yii\db\ActiveRecord
      */
     public function getOrderParagraphs()
     {
-        return $this->hasMany(OrderParagraph::className(), ['id_order' => 'id']);
+        return $this->hasMany(Paragraph::className(), ['id_order' => 'id']);
     }
 }

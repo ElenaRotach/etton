@@ -1,16 +1,16 @@
 <?php
 
-namespace app\modules\orderStatus;
+namespace app\modules\paragraph;
 
 /**
- * orderStatus module definition class
+ * order-paragraph module definition class
  */
-class OrderStatus extends \yii\base\Module
+class Paragraph extends \yii\base\Module
 {
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'app\modules\orderStatus\controllers';
+    public $controllerNamespace = 'app\modules\paragraph\controllers';
 
     /**
      * @inheritdoc

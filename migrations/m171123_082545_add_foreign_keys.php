@@ -41,28 +41,28 @@ class m171123_082545_add_foreign_keys extends Migration
         );
 
         $this->createIndex(
-            'idx-order_paragraph-order',
-            'order_paragraph',
+            'idx-paragraph-order',
+            'paragraph',
             'id_order'
         );
 
         $this->addForeignKey(
-            'fk-order_paragraph-id_order',
-            'order_paragraph',
+            'fk-paragraph-id_order',
+            'paragraph',
             'id_order',
             'order',
             'id',
             'CASCADE'
         );
         $this->createIndex(
-            'idx-order_paragraph-product',
-            'order_paragraph',
+            'idx-paragraph-product',
+            'paragraph',
             'id_product'
         );
 
         $this->addForeignKey(
-            'fk-order_paragraph-id_product',
-            'order_paragraph',
+            'fk-paragraph-id_product',
+            'paragraph',
             'id_product',
             'product',
             'id',

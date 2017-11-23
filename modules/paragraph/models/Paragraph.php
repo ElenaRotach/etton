@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\orderParagraph\models;
+namespace app\modules\paragraph\models;
 
 use Yii;
 use app\modules\order\models\Order;
 use app\modules\product\models\Product;
 
 /**
- * This is the model class for table "order_paragraph".
+ * This is the model class for table "paragraph".
  *
  * @property integer $id
  * @property integer $id_order
@@ -17,7 +17,7 @@ use app\modules\product\models\Product;
  * @property Order $idOrder
  * @property Product $idProduct
  */
-class OrderParagraph extends \yii\db\ActiveRecord
+class Paragraph extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc

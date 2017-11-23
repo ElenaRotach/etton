@@ -62,8 +62,11 @@ $config = [
         'order' => [
             'class' => 'app\modules\order\Order',
         ],
-        'order-paragraph' => [
-            'class' => 'app\modules\orderParagraph\OrderParagraph',
+        'paragraph' => [
+            'class' => 'app\modules\paragraph\Paragraph',
+        ],
+        'status' => [
+            'class' => 'app\modules\status\Status',
         ],
 
     ],

@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\orderStatus\controllers;
+namespace app\modules\status\controllers;
 
 use yii\web\Controller;
 
 /**
- * Default controller for the `orderStatus` module
+ * Default controller for the `status` module
  */
 class DefaultController extends Controller
 {

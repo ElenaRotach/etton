@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\orderStatus\models;
+namespace app\modules\status\models;
 
 use Yii;
 
@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $name
  */
-class OrderStatus extends \yii\db\ActiveRecord
+class Status extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc

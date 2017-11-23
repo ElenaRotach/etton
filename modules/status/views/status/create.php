@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\orderStatus\models\OrderStatus */
+/* @var $model app\modules\orderStatus\models\Status */
 
 $this->title = 'Create Order Status';
 $this->params['breadcrumbs'][] = ['label' => 'Order Statuses', 'url' => ['index']];

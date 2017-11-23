@@ -1,18 +1,18 @@
 <?php
 
-namespace app\modules\orderParagraph\controllers;
+namespace app\modules\status\controllers;
 
 use Yii;
-use app\modules\orderParagraph\models\OrderParagraph;
-use app\modules\orderParagraph\models\OrderParagraphSearch;
+use app\modules\status\models\Status;
+use app\modules\status\models\StatusSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * OrderParagraphController implements the CRUD actions for OrderParagraph model.
+ * StatusController implements the CRUD actions for status model.
  */
-class OrderParagraphController extends Controller
+class StatusController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class OrderParagraphController extends Controller
     }
 
     /**
-     * Lists all OrderParagraph models.
+     * Lists all status models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new OrderParagraphSearch();
+        $searchModel = new StatusSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class OrderParagraphController extends Controller
     }
 
     /**
-     * Displays a single OrderParagraph model.
+     * Displays a single status model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class OrderParagraphController extends Controller
     }
 
     /**
-     * Creates a new OrderParagraph model.
+     * Creates a new status model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new OrderParagraph();
+        $model = new Status();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class OrderParagraphController extends Controller
     }
 
     /**
-     * Updates an existing OrderParagraph model.
+     * Updates an existing status model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class OrderParagraphController extends Controller
     }
 
     /**
-     * Deletes an existing OrderParagraph model.
+     * Deletes an existing status model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class OrderParagraphController extends Controller
     }
 
     /**
-     * Finds the OrderParagraph model based on its primary key value.
+     * Finds the status model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return OrderParagraph the loaded model
+     * @return OrderStatus the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = OrderParagraph::findOne($id)) !== null) {
+        if (($model = Status::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

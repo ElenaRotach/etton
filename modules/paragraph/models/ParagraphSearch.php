@@ -1,16 +1,16 @@
 <?php
 
-namespace app\modules\orderStatus\models;
+namespace app\modules\paragraph\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\orderStatus\models\OrderStatus;
+//use app\modules\paragraph\models\Paragraph;
 
 /**
- * OrderStatusSearch represents the model behind the search form about `app\modules\orderStatus\models\OrderStatus`.
+ * ParagraphSearch represents the model behind the search form about `app\modules\paragraph\models\OrderParagraph`.
  */
-class OrderStatusSearch extends OrderStatus
+class ParagraphSearch extends Paragraph
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class OrderStatusSearch extends OrderStatus
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['id', 'id_order', 'id_product', 'count'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class OrderStatusSearch extends OrderStatus
      */
     public function search($params)
     {
-        $query = OrderStatus::find();
+        $query = Paragraph::find();
 
         // add conditions that should always apply here
 
@@ -60,9 +59,10 @@ class OrderStatusSearch extends OrderStatus
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'id_order' => $this->id_order,
+            'id_product' => $this->id_product,
+            'count' => $this->count,
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

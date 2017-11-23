@@ -3,7 +3,7 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `order_paragraph`.
+ * Handles the creation of table `paragraph`.
  */
 class m171123_081514_create_order_paragraph_table extends Migration
 {
@@ -15,7 +15,7 @@ class m171123_081514_create_order_paragraph_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('order_paragraph', [
+        $this->createTable('paragraph', [
             'id' => $this->primaryKey(),
             'id_order' => $this->integer()->comment('Идентификатор заказа'),
             'id_product' => $this->integer()->comment("Идентификатор продукта"),
@@ -24,6 +24,6 @@ class m171123_081514_create_order_paragraph_table extends Migration
     }
     public function down()
     {
-        $this->dropTable('order_paragraph');
+        $this->dropTable('paragraph');
     }
 }

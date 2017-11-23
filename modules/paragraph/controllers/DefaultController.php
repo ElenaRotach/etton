@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\orderParagraph\controllers;
+namespace app\modules\paragraph\controllers;
 
 use yii\web\Controller;
 
