@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\widgets\categoriesList\CategoriesListWidget;
 
 AppAsset::register($this);
 ?>
@@ -98,7 +99,14 @@ AppAsset::register($this);
         <!-- End Search -->
 
         <!-- Categories -->
-        <?= app\widgets\categoriesList\CategoriesListWidget::widget();?>
+        <?php $user = \app\models\AuthAssignment::find()->where(['user_id' => Yii::$app->user->getId()])->asArray()->one();
+        if($user['item_name'] == 'admin')
+        {
+            echo $this->render('admin');
+        }else{
+            echo CategoriesListWidget::widget();
+        }
+        ?>
         <!-- End Categories -->
 
     </div>
