@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+    <img src='/img/<?=$model->img?>' style="height: 200px">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'name',
             'description:ntext',
+
         ],
     ]) ?>
 

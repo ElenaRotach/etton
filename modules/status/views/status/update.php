@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\orderStatus\models\Status */
 
-$this->title = 'Update Order Status: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Order Statuses', 'url' => ['index']];
+$this->title = 'Обновить статус: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Статус', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="order-status-update">
 

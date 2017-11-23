@@ -8,6 +8,7 @@ use app\modules\product\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -65,8 +66,24 @@ class ProductController extends Controller
     {
         $model = new Product();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $file = UploadedFile::getInstance($model, 'img');
+            if(isset($file)) {
+                $uploaded = $file->saveAs('img/' . $file->name);
+
+                $model->img = $file->name;
+            }else{
+                $model->img = null;
+            }
+            if ($model->save()) {
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,8 +101,23 @@ class ProductController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $file = UploadedFile::getInstance($model, 'img');
+            if(isset($file)) {
+                $uploaded = $file->saveAs('img/' . $file->name);
+
+                $model->img = $file->name;
+            }else{
+                $model->img = null;
+            }
+            if ($model->update()) {
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

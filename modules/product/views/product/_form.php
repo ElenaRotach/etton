@@ -32,6 +32,8 @@ use app\modules\category\models\Category;
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
+    <?=$form->field($model, 'img')->fileInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

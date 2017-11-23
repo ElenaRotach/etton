@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\orderStatus\models\StatusSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Order Statuses';
+$this->title = 'Статус';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-status-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Order Status', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить статус', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
