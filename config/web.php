@@ -59,6 +59,9 @@ $config = [
         'product' => [
             'class' => 'app\modules\product\Product',
         ],
+        'order' => [
+            'class' => 'app\modules\order\Order',
+        ],
     ],
 
     'params' => $params,
