@@ -26,6 +26,7 @@ class BasketHeaderWidget extends Widget
 
         $orders = Order::find()
             ->where(['id_user' => Yii::$app->user->getId()])
+            ->andWhere(['status'=>1])
             ->asArray()
             ->all();
 
