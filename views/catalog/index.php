@@ -12,8 +12,8 @@
                 }
                 echo '<li><a href="#"><img src="' . $img . '" alt="" /></a><div class="product-info"><h3><a href="/catalog/index?id=' . $cat["id"] . '" style="color:#fff;">' .
                     $cat['name'] . '</a></h3>
-                        <div class="product-desc">
-                            <p>' . $cat['description'] . '</p>
+                        <div class="catalog-info product-desc">
+                            <p>' . mb_strimwidth($cat['description'], 0, 50, "...") . '</p>
     
                         </div>
                     </div>
@@ -37,10 +37,10 @@
                 } else {
                     $img = "/img/" . $prod['img'];
                 }
-                echo '<li><a href="#"><img src="' . $img . '" alt="" /></a><div class="product-info"><h3><a href="/product/index?id=' . $prod["id"] . '" style="color:#fff;">' .
+                echo '<li><a href="#"><img src="' . $img . '" alt="" /></a><div class="product-info"><h3><a href="/catalog/product?id=' . $prod["id"] . '" style="color:#fff;">' .
                     $prod['name'] . '</a></h3>
-                        <div class="product-desc">
-                            <p>' . $prod['description'] . '</p>
+                        <div class="catalog-info product-desc">
+                            <p>' . mb_strimwidth($prod['description'], 0, 50, "...") . '</p>
                             <strong class="price">' . $prod['price'] . '</strong>
                         </div>
                     </div>

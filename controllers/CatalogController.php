@@ -67,4 +67,16 @@ class CatalogController extends Controller
         $data = [$dataCat, $dataProd];
         return  $data;
     }
+
+    public function actionProduct($id)
+    {
+        if($id != ""){
+            $product = Product::findOne($id);
+        }else{
+            throw new \Exception("Ошибка получения данных");
+        }
+        return $this->render('product',[
+            'data' => $product
+        ]);
+    }
 }

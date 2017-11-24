@@ -56,7 +56,7 @@ if($user['item_name'] == 'admin')
     echo $this->render('user');
 }
 ?>
-    <div class="col-lg-10">
+    <div class="col-lg-9 col-md-9">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
