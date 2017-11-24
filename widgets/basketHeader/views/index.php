@@ -4,9 +4,9 @@ use yii\helpers\Html;
 ?>
 
 <div id="cart">
-    <a href="#" class="cart-link-user">Корзина</a>
+    <a href="/userorders/index" class="cart-link-user">Корзина</a>
     <div class="cl">&nbsp;</div>
-    <span>Заказов: <strong><?=$count?></strong></span>
+    <span>Товаров: <strong><?=$count?></strong></span>
     &nbsp;&nbsp;
     <span>Сумма: <strong><?=$sum?></strong></span>
     <br>

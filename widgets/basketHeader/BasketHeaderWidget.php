@@ -30,7 +30,7 @@ class BasketHeaderWidget extends Widget
             ->all();
 
         $sum = 0;
-
+        $count=0;
         foreach ($orders as $o){
 
             $paragraph = Paragraph::find()
@@ -43,6 +43,7 @@ class BasketHeaderWidget extends Widget
             foreach ($paragraph as $p){
 
                 $sum += ($p['count'] * Product::findOne($p['id_product'])->price);
+                $count ++;
             }
 
             /*if(isset($paragraph[0]['sum'])){
@@ -50,7 +51,7 @@ class BasketHeaderWidget extends Widget
                 $sum += $paragraph[0]['sum'];
             }*/
         }
-        $data = ['sum'=>$sum, 'count'=>count($orders)];
+        $data = ['sum'=>$sum, 'count'=>$count];
         return $data;
     }
 }
