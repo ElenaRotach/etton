@@ -70,6 +70,7 @@ class CatalogController extends Controller
 
     public function actionProduct($id)
     {
+        //var_dump('test');exit();
         if($id != ""){
             $product = Product::findOne($id);
         }else{
