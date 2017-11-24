@@ -42,8 +42,7 @@ AppAsset::register($this);
             <ul>
                 <li><a href="#" class="active">Главная</a></li>
                 <li><a href="#">Помощь</a></li>
-                <li><a href="#">Профиль</a></li>
-                <li><a href="#">Заказы</a></li>
+                <li><a href="/catalog/index?id">Каталог</a></li>
                 <li><a href="#">Контакты</a></li>
             </ul>
         </div>

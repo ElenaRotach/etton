@@ -6,7 +6,7 @@
                 $data = $dataProvider->asArray()->all();
                 foreach ($data as $category){
 
-                    echo '<li data-id="' . $category['id'] . '"><a href="#" title="' . $category['description'] . '">' . $category['name'] . '</a></li>';
+                    echo '<li data-id="' . $category['id'] . '"><a href="/catalog/index?id=' . $category['id'] .  '" title="' . $category['description'] . '">' . $category['name'] . '</a></li>';
                 }
             ?>
             <!--<li><a href="#">Ручки</a></li>
