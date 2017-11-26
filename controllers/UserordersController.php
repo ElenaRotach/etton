@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\modules\order\models\Order;
+use app\modules\order\models\OrderSearch;
 use app\modules\paragraph\models\Paragraph;
 use app\modules\paragraph\models\ParagraphSearch;
 use yii\web\Controller;
@@ -60,8 +61,12 @@ class UserordersController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $ordersSearch = new OrderSearch();
+        $ordersProvider = $ordersSearch->search(Yii::$app->request->queryParams, Yii::$app->user->getId());
         return $this->render('index',[
-            'dataProvider' => $dataProvider,//$this->dataProvider(Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one()->id),
+            'dataProvider' => $dataProvider,
+            'ordersSearch' => $ordersSearch,
+            'ordersProvider' => $ordersProvider
         ]);
     }
 
@@ -95,6 +100,9 @@ class UserordersController extends Controller
             $paragraph->id_product = $id;
             $paragraph->id_order = $idActiveOrder;
 
+            $ordersSearch = new OrderSearch();
+            $ordersProvider = $ordersSearch->search(Yii::$app->request->queryParams, Yii::$app->user->getId());
+
             $query = $this->dataProvider(Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one()->id);
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
@@ -102,7 +110,9 @@ class UserordersController extends Controller
 
             if($paragraph->save()){
                 return $this->render('index',[
-                    'dataProvider' => $dataProvider,//$this->dataProvider($idActiveOrder),
+                    'dataProvider' => $dataProvider,
+                    'ordersSearch' => $ordersSearch,
+                    'ordersProvider' => $ordersProvider
                 ]);
             }else{
                 //var_dump($paragraph->errors);exit();
@@ -129,8 +139,12 @@ class UserordersController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $ordersSearch = new OrderSearch();
+        $ordersProvider = $ordersSearch->search(Yii::$app->request->queryParams, Yii::$app->user->getId());
         return $this->render('index',[
-            'dataProvider' => $dataProvider,//$this->dataProvider($idActiveOrder),
+            'dataProvider' => $dataProvider,
+            'ordersSearch' => $ordersSearch,
+            'ordersProvider' => $ordersProvider
         ]);
     }
 }

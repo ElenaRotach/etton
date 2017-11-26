@@ -39,10 +39,14 @@ class OrderSearch extends Order
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $id)
     {
+
         $query = Order::find();
 
+        if($id != null){
+            $query->where(['id_user'=>$id]);
+        }
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

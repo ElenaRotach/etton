@@ -8,45 +8,16 @@ use yii\grid\GridView;
 use app\modules\product\models\Product;
 use yii\helpers\Html;
 use \yii\helpers\Url;
+use app\modules\status\models\Status;
 ?>
 <ul id="myTab" class="nav nav-tabs">
     <li class="active"><a href="#active" data-toggle="tab">Активный заказ</a></li>
     <li class=""><a href="#orders" data-toggle="tab">Заказы</a></li>
 </ul>
 <div id="myTabContent" class="tab-content">
-    <div class="tab-pane fade" id="active">
+    <div class="tab-pane fade  active in" id="active">
         <div>
 
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                //'filterModel' => $searchModel,
-                'columns' => [
-
-
-                    'id',
-                    'id_order',
-                    //'id_product',
-                    [
-                        'attribute' => 'id_product',
-                        'label' => 'Товар',
-                        'encodeLabel' => false,
-                        'content' => function (\app\modules\paragraph\models\Paragraph $model) {
-                            return Product::find()->where(['id' => $model->id_product])->asArray()->one()['name'];
-                        },
-                        'filterInputOptions' => [
-                            'class' => 'form-control'
-                        ]
-                    ],
-                    'count',
-
-
-                ],
-            ]); ?>
-        </div>
-        <button class="btn btn-default">Подтвердить</button>
-    </div>
-    <div class="tab-pane fade active in" id="orders">
-        <div>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'columns' => [
@@ -54,7 +25,7 @@ use \yii\helpers\Url;
                         'class' => \yii\grid\ActionColumn::class,//\yii\grid\SerialColumn::class,
                         'options' => ['width' => 60],
                         'visibleButtons' => [
-                                'view' => false,
+                            'view' => false,
                         ],
                         'buttons' => [
                             'update' => function ($url, $model, $key) {
@@ -64,7 +35,7 @@ use \yii\helpers\Url;
                     ],
 
                     [
-                            'class' => \yii\grid\SerialColumn::class
+                        'class' => \yii\grid\SerialColumn::class
                     ],
                     [
                         'label' => 'Изображение',
@@ -101,8 +72,8 @@ use \yii\helpers\Url;
                     ],
                     'count',
                     [
-                            'attribute' => 'id_product.price',
-                            'class' => \yii\grid\DataColumn::class,
+                        'attribute' => 'id_product.price',
+                        'class' => \yii\grid\DataColumn::class,
                         'label' => 'Цена за шт.',
 
                         'content'=> function($model) {
@@ -132,6 +103,74 @@ use \yii\helpers\Url;
                     ],
 
                 ],
+            ]); ?>
+        </div>
+        <button class="btn btn-default">Подтвердить</button>
+    </div>
+    <div class="tab-pane fade" id="orders">
+        <div>
+            <?= GridView::widget([
+                'dataProvider' => $ordersProvider,
+                'filterModel' => $ordersSearch,
+                'columns' => [
+                    [
+                        'class' => \yii\grid\SerialColumn::class
+                    ],
+                    //'status',
+                    [
+                        'attribute' => 'status',
+                        'class' => \yii\grid\DataColumn::class,
+                        'label' => 'Статус заказа',
+
+                        'content'=> function($model) {
+                            return Status::findOne(['id'=>$model->status])->name;
+                        }
+                    ],
+                    //'created_at',
+                    [
+                        'attribute' => 'created_at',
+                        'class' => \yii\grid\DataColumn::class,
+                        'label' => 'Дата создания',
+
+                        'content'=> function($model) {
+                            return date('d.m.Y H:i:s', $model->status);
+                        }
+                    ],
+                    //'update_at',
+                    [
+                        'attribute' => 'update_at',
+                        'class' => \yii\grid\DataColumn::class,
+                        'label' => 'Дата обновления',
+
+                        'content'=> function($model) {
+                            if($model->update_at != null){
+                                return date('d.m.Y H:i:s', $model->update_at);
+                            }else{
+                                return '';
+                            }
+
+                        }
+                    ],
+                    //'confirmation_at',
+                    [
+                        'attribute' => 'confirmation_at',
+                        'class' => \yii\grid\DataColumn::class,
+                        'label' => 'Дата подтверждения',
+
+                        'content'=> function($model) {
+                            if($model->confirmation_at != null){
+                                return date('d.m.Y H:i:s', $model->confirmation_at);
+                            }else{
+                                return '';
+                            }
+
+                        }
+                    ],
+                    //количество товаров
+
+                    //на сумму
+
+                ]
             ]); ?>
         </div>
     </div>
