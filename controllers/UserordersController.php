@@ -56,15 +56,12 @@ class UserordersController extends Controller
 
     public function actionIndex()
     {
-        $searchModel = new ParagraphSearch();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $query = $this->dataProvider(Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one()->id);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
         return $this->render('index',[
             'dataProvider' => $dataProvider,//$this->dataProvider(Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one()->id),
-            'searchModel' => $searchModel
         ]);
     }
 
@@ -83,8 +80,13 @@ class UserordersController extends Controller
                 $order = new Order();
                 $order->id_user = Yii::$app->user->getId();
                 $order->status = 1;
+                $order->created_at = time();
                 $order->save();
                 $idActiveOrder = $order->id;
+            }else{
+                $order = Order::findOne($idActiveOrder);
+                $order->update_at = time();
+                $order->save();
             }
             //var_dump($idActiveOrder);exit();
 
@@ -93,13 +95,14 @@ class UserordersController extends Controller
             $paragraph->id_product = $id;
             $paragraph->id_order = $idActiveOrder;
 
-            $searchModel = new ParagraphSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $query = $this->dataProvider(Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one()->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+            ]);
 
             if($paragraph->save()){
                 return $this->render('index',[
                     'dataProvider' => $dataProvider,//$this->dataProvider($idActiveOrder),
-                    'searchModel' =>  $searchModel//new ParagraphSearch()
                 ]);
             }else{
                 //var_dump($paragraph->errors);exit();
@@ -122,14 +125,12 @@ class UserordersController extends Controller
         $paragraph = Paragraph::findOne($id);
         $paragraph->delete();
 
-        $searchModel = new ParagraphSearch();
         $query = $this->dataProvider(Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one()->id);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
         return $this->render('index',[
             'dataProvider' => $dataProvider,//$this->dataProvider($idActiveOrder),
-            'searchModel' =>  $searchModel//new ParagraphSearch()
         ]);
     }
 }

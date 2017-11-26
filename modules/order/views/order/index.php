@@ -30,6 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
 
             ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute'=>'created_at',
+                'label'=>'Создано',
+                'format'=>'datetime', // Доступные модификаторы - date:datetime:time
+                'headerOptions' => ['width' => '200'],
+            ],
         ],
     ]); ?>
 </div>

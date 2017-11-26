@@ -19,7 +19,7 @@ use \yii\helpers\Url;
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
+                //'filterModel' => $searchModel,
                 'columns' => [
 
 
@@ -49,7 +49,6 @@ use \yii\helpers\Url;
         <div>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
                 'columns' => [
                     [
                         'class' => \yii\grid\ActionColumn::class,//\yii\grid\SerialColumn::class,

@@ -18,7 +18,7 @@ class OrderSearch extends Order
     public function rules()
     {
         return [
-            [['id', 'id_user', 'status'], 'integer'],
+            [['id', 'id_user', 'status', 'created_at', 'update_at', 'confirmation_at'], 'integer'],
             [['paragraph'], 'safe'],
         ];
     }
@@ -62,6 +62,9 @@ class OrderSearch extends Order
             'id' => $this->id,
             'id_user' => $this->id_user,
             'status' => $this->status,
+            'created_at' => $this->created_at,
+            'update_at' => $this->update_at,
+            'confirmation_at' => $this->confirmation_at
         ]);
 
         $query->andFilterWhere(['like', 'paragraph', $this->paragraph]);

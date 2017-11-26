@@ -31,7 +31,7 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_user', 'status'], 'integer'],
+            [['id_user', 'status', 'created_at', 'update_at', 'confirmation_at'], 'integer'],
             [['paragraph'], 'string'],
         ];
     }
@@ -46,6 +46,9 @@ class Order extends \yii\db\ActiveRecord
             'id_user' => 'Пользователь',
             'paragraph' => 'Пункты',
             'status' => 'Статус',
+            'created_at' => 'Дата создания',
+            'update_at' => 'Дата обновления',
+            'confirmation_at' => 'Дата подтверждения'
         ];
     }
 
