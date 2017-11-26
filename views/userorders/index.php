@@ -28,12 +28,13 @@ use app\modules\paragraph\models\Paragraph;
                             'options' => ['width' => 60],
                             'visibleButtons' => [
                                 'view' => false,
+                                'update' => false
                             ],
-                            'buttons' => [
+                            /*'buttons' => [
                                 'update' => function ($url, $model, $key) {
-                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#', ['id' => $model->id, 'onclick' => 'test']);
+                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#', ['id' => $model->id, 'onclick' => 'test()']);
                                 },
-                            ]
+                            ]*/
                         ],
 
                         [
@@ -72,7 +73,14 @@ use app\modules\paragraph\models\Paragraph;
                                 'class' => 'form-control'
                             ]
                         ],
-                        'count',
+                        //'count',
+                        [
+                            'attribute' => 'count',
+                            'label' => 'Количество',
+                            'content' => function ($model) {
+                                return '<span data-ref="'. $model->id .'">' . $model->count. '</span> <button class="order_add_product_count_btn" data-id="'. $model->id .'" onclick="test(' . $model->id . ', this)">+</button>';
+                            }
+                        ],
                         [
                             'attribute' => 'id_product.price',
                             'class' => \yii\grid\DataColumn::class,

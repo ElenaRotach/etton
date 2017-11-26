@@ -6,6 +6,8 @@ use app\modules\order\models\Order;
 use app\modules\order\models\OrderSearch;
 use app\modules\paragraph\models\Paragraph;
 use app\modules\paragraph\models\ParagraphSearch;
+use app\modules\product\models\Product;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -153,5 +155,31 @@ class UserordersController extends Controller
             'ordersSearch' => $ordersSearch,
             'ordersProvider' => $ordersProvider
         ]);
+    }
+
+    public function actionGetcount(){
+        if(Yii::$app->request->isGet){
+            $request = Yii::$app->request->get();
+            $paragraph = Paragraph::findOne($request['id']);
+                $paragraph->count += $request['sign'];
+                $product = Product::findOne($paragraph->id_product);
+                $product->count -= $request['sign'];
+                $product->update();
+
+            if($paragraph->update()){
+
+                $query = Paragraph::find()
+                    ->select(['p.count', '(p.count * prod.price) as sum', 'prod.count as rez'])
+                    ->alias('p')
+                    ->leftJoin(Product::tableName() . ' prod', 'p.id_product=prod.id')
+                    ->where(['p.id'=>$paragraph->id])
+                    ->asArray()
+                    ->all();
+                $query = Json::encode($query);
+                return $query;
+            }
+        }else{
+            return false;
+        }
     }
 }
