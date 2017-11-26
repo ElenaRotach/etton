@@ -62,9 +62,9 @@ class UserordersController extends Controller
         $order = Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one();
         if(isset($order)){
             $query = $this->dataProvider($order->id);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+            ]);
         }else{
             $dataProvider = null;
         }
@@ -181,5 +181,32 @@ class UserordersController extends Controller
         }else{
             return false;
         }
+    }
+
+    public function actionConfirmation(){
+
+        //throw new \Exception();
+        $order = Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one();
+        //var_dump($order->status);exit();
+        $order->status = 2;
+        $order->confirmation_at = time();
+        $order->update();
+        $order = Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one();
+        if(isset($order)){
+            $query = $this->dataProvider($order->id);
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+            ]);
+        }else{
+            $dataProvider = null;
+        }
+
+        $ordersSearch = new OrderSearch();
+        $ordersProvider = $ordersSearch->search(Yii::$app->request->queryParams, Yii::$app->user->getId());
+        return $this->render('index',[
+            'dataProvider' => $dataProvider,
+            'ordersSearch' => $ordersSearch,
+            'ordersProvider' => $ordersProvider
+        ]);
     }
 }

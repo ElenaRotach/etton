@@ -61,6 +61,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 document.onclick = function(e) {
+    /*к сожалению, не успеваю отладить*/
     var els = $('input[type=number]');
     if($(e.target).data('id') === undefined){
         els.hide();
@@ -78,4 +79,17 @@ document.onclick = function(e) {
             }
         }
     }
+}
+
+function confirmation() {
+    $.ajax({
+        url: "/userorders/confirmation",
+        type: 'GET',
+        data: {},
+        success: function () {
+        },
+        error: function () {
+            console.log('Внутренняя ошибка сервера');
+        }
+    });
 }

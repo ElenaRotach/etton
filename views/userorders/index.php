@@ -115,7 +115,8 @@ use app\modules\paragraph\models\Paragraph;
                     ],
                 ]);
 
-                echo Html::button('Подтвердить',['class'=>'btn btn-default']);
+                //echo Html::button('Подтвердить',['class'=>'btn btn-default', 'action'=>Url::to('/userorders/confirmation')]);
+                echo Html::button('Подтвердить',['class'=>'btn btn-default', 'onclick'=>'confirmation()']);
             }else{
                 echo "<br><h2>Нет активных заказов</h2>";
             }
