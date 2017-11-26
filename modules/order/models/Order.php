@@ -59,4 +59,8 @@ class Order extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Paragraph::className(), ['id_order' => 'id']);
     }
+
+    public function getCountParagraph(){
+        return \app\modules\paragraph\models\Paragraph::find()->select(['count(id) as count'])->where(['id_order' => $this->id])->groupBy(['id_order'])->asArray()->all()[0]['count'];
+    }
 }

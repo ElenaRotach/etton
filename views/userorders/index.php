@@ -9,6 +9,7 @@ use app\modules\product\models\Product;
 use yii\helpers\Html;
 use \yii\helpers\Url;
 use app\modules\status\models\Status;
+use app\modules\paragraph\models\Paragraph;
 ?>
 <ul id="myTab" class="nav nav-tabs">
     <li class="active"><a href="#active" data-toggle="tab">Активный заказ</a></li>
@@ -17,95 +18,103 @@ use app\modules\status\models\Status;
 <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade  active in" id="active">
         <div>
-
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'columns' => [
-                    [
-                        'class' => \yii\grid\ActionColumn::class,//\yii\grid\SerialColumn::class,
-                        'options' => ['width' => 60],
-                        'visibleButtons' => [
-                            'view' => false,
+<?php
+            if($dataProvider != null) {
+                echo GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'columns' => [
+                        [
+                            'class' => \yii\grid\ActionColumn::class,//\yii\grid\SerialColumn::class,
+                            'options' => ['width' => 60],
+                            'visibleButtons' => [
+                                'view' => false,
+                            ],
+                            'buttons' => [
+                                'update' => function ($url, $model, $key) {
+                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#', ['id' => $model->id, 'onclick' => 'test']);
+                                },
+                            ]
                         ],
-                        'buttons' => [
-                            'update' => function ($url, $model, $key) {
-                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#', ['id' => $model->id, 'onclick' => 'test']);
+
+                        [
+                            'class' => \yii\grid\SerialColumn::class
+                        ],
+                        [
+                            'label' => 'Изображение',
+                            'format' => 'raw',
+                            'value' => function ($model) {
+                                $img = Product::find()->where(['id' => $model->id_product])->asArray()->one()['img'];
+                                if ($img === null) {
+                                    $img = "img/default.jpg";
+                                } else {
+                                    $img = "img/" . $img;
+                                }
+                                return Html::img(Url::toRoute($img), [
+                                    'alt' => 'yii2 - картинка в gridview',
+                                    'style' => 'width:70px;'
+                                ]);
                             },
-                        ]
-                    ],
+                        ],
+                        //'id_order',
+                        [
+                            'attribute' => 'id_order',
+                            'label' => '№ Заказа'
+                        ],
+                        //'id_product',
+                        [
+                            'attribute' => 'id_product',
+                            'label' => 'Товар',
+                            'encodeLabel' => false,
+                            'content' => function (\app\modules\paragraph\models\Paragraph $model) {
+                                return Product::find()->where(['id' => $model->id_product])->asArray()->one()['name'];
+                            },
+                            'filterInputOptions' => [
+                                'class' => 'form-control'
+                            ]
+                        ],
+                        'count',
+                        [
+                            'attribute' => 'id_product.price',
+                            'class' => \yii\grid\DataColumn::class,
+                            'label' => 'Цена за шт.',
 
-                    [
-                        'class' => \yii\grid\SerialColumn::class
-                    ],
-                    [
-                        'label' => 'Изображение',
-                        'format' => 'raw',
-                        'value' => function($model){
-                            $img = Product::find()->where(['id' => $model->id_product])->asArray()->one()['img'];
-                            if($img===null){
-                                $img = "img/default.jpg";
-                            }else{
-                                $img = "img/" .  $img;
+                            'content' => function ($model) {
+                                Yii::$app->formatter->locale = 'ru-RU';
+                                return Yii::$app->formatter->asCurrency(Product::findOne($model->id_product)->price);
                             }
-                            return Html::img(Url::toRoute($img),[
-                                'alt'=>'yii2 - картинка в gridview',
-                                'style' => 'width:70px;'
-                            ]);
-                        },
-                    ],
-                    //'id_order',
-                    [
-                        'attribute' => 'id_order',
-                        'label' => '№ Заказа'
-                    ],
-                    //'id_product',
-                    [
-                        'attribute' => 'id_product',
-                        'label' => 'Товар',
-                        'encodeLabel' => false,
-                        'content' => function (\app\modules\paragraph\models\Paragraph $model) {
-                            return Product::find()->where(['id' => $model->id_product])->asArray()->one()['name'];
-                        },
-                        'filterInputOptions' => [
-                            'class' => 'form-control'
-                        ]
-                    ],
-                    'count',
-                    [
-                        'attribute' => 'id_product.price',
-                        'class' => \yii\grid\DataColumn::class,
-                        'label' => 'Цена за шт.',
+                        ],
 
-                        'content'=> function($model) {
-                            Yii::$app->formatter->locale = 'ru-RU';
-                            return Yii::$app->formatter->asCurrency(Product::findOne($model->id_product)->price);
-                        }
+                        [
+                            'attribute' => 'id_product.count',
+                            'class' => \yii\grid\DataColumn::class,
+                            'label' => 'В наличии',
+
+                            'content' => function ($model) {
+                                return Product::findOne($model->id_product)->count;
+                            }
+                        ],
+
+                        [
+                            'attribute' => 'id_product.count',
+                            'class' => \yii\grid\DataColumn::class,
+                            'label' => 'Сумма',
+
+                            'content' => function ($model) {
+                                return Yii::$app->formatter->asCurrency(Product::findOne($model->id_product)->price * $model->count);
+                            }
+                        ],
+
                     ],
+                ]);
 
-                    [
-                        'attribute' => 'id_product.count',
-                        'class' => \yii\grid\DataColumn::class,
-                        'label' => 'В наличии',
+                echo Html::button('Подтвердить',['class'=>'btn btn-default']);
+            }else{
+                echo "<br><h2>Нет активных заказов</h2>";
+            }
 
-                        'content'=> function($model) {
-                            return Product::findOne($model->id_product)->count;
-                        }
-                    ],
-
-                    [
-                        'attribute' => 'id_product.count',
-                        'class' => \yii\grid\DataColumn::class,
-                        'label' => 'Сумма',
-
-                        'content'=> function($model) {
-                            return Yii::$app->formatter->asCurrency(Product::findOne($model->id_product)->price * $model->count);
-                        }
-                    ],
-
-                ],
-            ]); ?>
+            ?>
         </div>
-        <button class="btn btn-default">Подтвердить</button>
+
     </div>
     <div class="tab-pane fade" id="orders">
         <div>
@@ -133,7 +142,7 @@ use app\modules\status\models\Status;
                         'label' => 'Дата создания',
 
                         'content'=> function($model) {
-                            return date('d.m.Y H:i:s', $model->status);
+                            return date('d.m.Y H:i:s', $model->created_at+3*60*60);
                         }
                     ],
                     //'update_at',
@@ -167,7 +176,12 @@ use app\modules\status\models\Status;
                         }
                     ],
                     //количество товаров
-
+                    //'countParagraph'
+                    [
+                        'attribute' => 'countParagraph',
+                        'class' => \yii\grid\DataColumn::class,
+                        'label' => 'Количество товаров в заказе'
+                    ],
                     //на сумму
 
                 ]

@@ -57,10 +57,16 @@ class UserordersController extends Controller
 
     public function actionIndex()
     {
-        $query = $this->dataProvider(Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one()->id);
+        $order = Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one();
+        if(isset($order)){
+            $query = $this->dataProvider($order->id);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        }else{
+            $dataProvider = null;
+        }
+
         $ordersSearch = new OrderSearch();
         $ordersProvider = $ordersSearch->search(Yii::$app->request->queryParams, Yii::$app->user->getId());
         return $this->render('index',[
@@ -77,7 +83,7 @@ class UserordersController extends Controller
 
             $request =Yii::$app->request->post();
 
-            $idActiveOrder = Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one()->id;
+            $idActiveOrder = Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one();
             //r_dump($idActiveOrder);exit();
 
             if(is_null($idActiveOrder)){
@@ -92,11 +98,12 @@ class UserordersController extends Controller
                 $order = Order::findOne($idActiveOrder);
                 $order->update_at = time();
                 $order->save();
+                $idActiveOrder = $order->id;
             }
             //var_dump($idActiveOrder);exit();
 
             $paragraph = new Paragraph();
-            $paragraph->count = 0;
+            $paragraph->count = 1;
             $paragraph->id_product = $id;
             $paragraph->id_order = $idActiveOrder;
 

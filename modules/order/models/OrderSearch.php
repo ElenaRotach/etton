@@ -2,6 +2,7 @@
 
 namespace app\modules\order\models;
 
+use app\modules\paragraph\models\Paragraph;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -12,13 +13,14 @@ use app\modules\order\models\Order;
  */
 class OrderSearch extends Order
 {
+    public $countParagraph;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'id_user', 'status', 'created_at', 'update_at', 'confirmation_at'], 'integer'],
+            [['id', 'id_user', 'status', 'created_at', 'update_at', 'confirmation_at', 'countParagraph'], 'integer'],
             [['paragraph'], 'safe'],
         ];
     }
@@ -52,7 +54,21 @@ class OrderSearch extends Order
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+/*        $dataProvider->setSort([
+            'attributes' => [
+                'countParagraph' => [
+                    'asc' => [
+                        $query->select(['o.id', 'o.id_user', 'o.status', 'o.created_at', 'o.update_at', 'o.confirmation_at', 'count(p.id) as countParagraph'])
+                                ->alias('o')
+                                ->leftJoin(Paragraph::tableName() . ' p', 'p.id_order=o.id')->groupBy(['o.id'])
+                        'countParagraph' => SORT_ASC],
+                    'desc' => ['countParagraph' => SORT_DESC],
+                    'label' => 'Количество товаров в заказе',
+                    'default' => SORT_ASC
+                ],
+                'country_id'
+            ]
+        ]);*/
         $this->load($params);
 
         if (!$this->validate()) {
@@ -68,9 +84,15 @@ class OrderSearch extends Order
             'status' => $this->status,
             'created_at' => $this->created_at,
             'update_at' => $this->update_at,
-            'confirmation_at' => $this->confirmation_at
+            'confirmation_at' => $this->confirmation_at,
+            //'countParagraph' => $this->countParagraph
         ]);
-
+        if(isset($this->countParagraph) && $this->countParagraph!=""){
+            $query->select(['o.id', 'o.id_user', 'o.status', 'o.created_at', 'o.update_at', 'o.confirmation_at', 'count(p.id) as countParagraph']);
+            $query->alias('o');
+            //SELECT `o`.`id`, `o`.`id_user`, `o`.`status`, `o`.`created_at`, `o`.`update_at`, `o`.`confirmation_at`, count(p.id) as countParagraph FROM `order` `o` LEFT JOIN `order_paragraph` `p` ON p.id_order=o.id GROUP BY o.id HAVING countParagraph = 6
+            $query->leftJoin(Paragraph::tableName() . ' p', 'p.id_order=o.id')->groupBy(['o.id'])->having(['countParagraph'=> $this->countParagraph]);
+        }
         $query->andFilterWhere(['like', 'paragraph', $this->paragraph]);
 
         return $dataProvider;
