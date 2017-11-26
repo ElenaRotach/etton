@@ -67,4 +67,6 @@ class Paragraph extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Product::className(), ['id' => 'id_product']);
     }
+
+
 }

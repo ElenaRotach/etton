@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\modules\product\models\Product;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\orderParagraph\models\OrderParagraphSearch */
@@ -26,7 +27,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'id_order',
-            'id_product',
+            //'id_product',
+            [
+                'attribute' => 'id_product',
+                'label' => 'Товар',
+                'encodeLabel' => false,
+                'content' => function (Product $model) {
+                    return Product::find()->where(['id' => $model->id_product])->asArray()->one()['name'];
+                },
+                'filterInputOptions' => [
+                    'class' => 'form-control'
+                ]
+            ],
             'count',
 
             ['class' => 'yii\grid\ActionColumn'],

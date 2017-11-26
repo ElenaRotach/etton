@@ -30,7 +30,7 @@ class RandomProductWidget extends Widget
         $rnd_id = [];
         $data = [];
 
-        while (count($rnd_id)<6){
+        while (count($rnd_id)<5){
 
             $rnd = random_int(0, $max[0]->id);
             $prod = Product::findOne($rnd);

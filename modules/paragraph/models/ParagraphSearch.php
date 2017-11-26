@@ -66,4 +66,6 @@ class ParagraphSearch extends Paragraph
 
         return $dataProvider;
     }
+
+
 }
