@@ -13,6 +13,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 
 class UserordersController extends Controller
 {
@@ -59,22 +60,12 @@ class UserordersController extends Controller
 
     public function actionIndex()
     {
-        $order = Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one();
-        if(isset($order)){
-            $query = $this->dataProvider($order->id);
-            $dataProvider = new ActiveDataProvider([
-                'query' => $query,
-            ]);
-        }else{
-            $dataProvider = null;
-        }
+        $data = $this->dataProvider();
 
-        $ordersSearch = new OrderSearch();
-        $ordersProvider = $ordersSearch->search(Yii::$app->request->queryParams, Yii::$app->user->getId());
         return $this->render('index',[
-            'dataProvider' => $dataProvider,
-            'ordersSearch' => $ordersSearch,
-            'ordersProvider' => $ordersProvider
+            'dataProvider' => $data[0],
+            'ordersSearch' => $data[1],
+            'ordersProvider' => $data[2]
         ]);
     }
 
@@ -109,20 +100,17 @@ class UserordersController extends Controller
             $paragraph->id_product = $id;
             $paragraph->id_order = $idActiveOrder;
 
-            $ordersSearch = new OrderSearch();
-            $ordersProvider = $ordersSearch->search(Yii::$app->request->queryParams, Yii::$app->user->getId());
+            //$data = $this->dataProvider();
 
-            $query = $this->dataProvider(Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one()->id);
-            $dataProvider = new ActiveDataProvider([
-                'query' => $query,
-            ]);
+
 
             if($paragraph->save()){
-                return $this->render('index',[
-                    'dataProvider' => $dataProvider,
-                    'ordersSearch' => $ordersSearch,
-                    'ordersProvider' => $ordersProvider
-                ]);
+              /*  return $this->render('index',[
+                    'dataProvider' => $data[0],
+                    'ordersSearch' => $data[1],
+                    'ordersProvider' => $data[2]
+                ]);*/
+                Yii::$app->response->redirect(Url::to('\userorders\index'));
             }else{
                 //var_dump($paragraph->errors);exit();
                 throw new \Exception('Упс');
@@ -131,12 +119,26 @@ class UserordersController extends Controller
         }
     }
 
-    private function dataProvider($idOrder){
+    private function dataProvider(){
 
-        $query = Paragraph::find()
-            ->where(['id_order'=>$idOrder]);
+        $order = Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one();
+        if(isset($order)){
+            //$query = $this->dataProvider($order->id);
+            $query = Paragraph::find()
+                ->where(['id_order'=>$order->id]);
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+            ]);
+        }else{
+            $dataProvider = null;
+        }
 
-        return $query;
+        $ordersSearch = new OrderSearch();
+        $ordersProvider = $ordersSearch->search(Yii::$app->request->queryParams, Yii::$app->user->getId());
+
+        $data = [$dataProvider, $ordersSearch, $ordersProvider];
+
+        return $data;
     }
 
     public function actionDelete($id){
@@ -144,17 +146,13 @@ class UserordersController extends Controller
         $paragraph = Paragraph::findOne($id);
         $paragraph->delete();
 
-        $query = $this->dataProvider(Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one()->id);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-        $ordersSearch = new OrderSearch();
-        $ordersProvider = $ordersSearch->search(Yii::$app->request->queryParams, Yii::$app->user->getId());
+        /*$data = $this->dataProvider();
+
         return $this->render('index',[
-            'dataProvider' => $dataProvider,
-            'ordersSearch' => $ordersSearch,
-            'ordersProvider' => $ordersProvider
-        ]);
+            'dataProvider' => $data[0],
+            'ordersSearch' => $data[1],
+            'ordersProvider' => $data[2]
+        ]);*/
     }
 
     public function actionGetcount(){
@@ -191,22 +189,14 @@ class UserordersController extends Controller
         $order->status = 2;
         $order->confirmation_at = time();
         $order->update();
-        $order = Order::find()->where(['id_user'=>Yii::$app->user->getId()])->andWhere(['status'=>1])->one();
-        if(isset($order)){
-            $query = $this->dataProvider($order->id);
-            $dataProvider = new ActiveDataProvider([
-                'query' => $query,
-            ]);
-        }else{
-            $dataProvider = null;
-        }
 
-        $ordersSearch = new OrderSearch();
-        $ordersProvider = $ordersSearch->search(Yii::$app->request->queryParams, Yii::$app->user->getId());
+        /*$data = $this->dataProvider();
+
         return $this->render('index',[
-            'dataProvider' => $dataProvider,
-            'ordersSearch' => $ordersSearch,
-            'ordersProvider' => $ordersProvider
-        ]);
+            'dataProvider' => $data[0],
+            'ordersSearch' => $data[1],
+            'ordersProvider' => $data[2]
+        ]);*/
+        Yii::$app->response->redirect(Url::to('\userorders\index'));
     }
 }
